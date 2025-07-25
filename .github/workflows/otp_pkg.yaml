@@ -81,7 +81,7 @@ jobs:
         run: |
           rebar3 grisp deploy
 
-      - name: Create GitHub Issue on Deploy Test Failure
+      - name: Create GitHub Issue Failure
         if: ${{ steps.build.outcome == 'failure' || steps.deploy-test.outcome == 'failure' }}
         run: |
           apt-get update && apt-get install -y curl
