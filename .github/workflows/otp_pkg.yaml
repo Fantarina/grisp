@@ -79,12 +79,10 @@ jobs:
         working-directory: robot
         run: |
           rebar3 grisp deploy
-
       - name: Create GitHub Issue Failure
         if: ${{ steps.build.outcome == 'failure' || steps.deploy-test.outcome == 'failure' }}
         run: |
           apt-get update && apt-get install -y curl
-
           if [ "${{ steps.build.outcome }}" = "failure" ]; then
             curl -L -X POST \
             -H "Accept: application/vnd.github+json" \
