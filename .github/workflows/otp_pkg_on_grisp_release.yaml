@@ -101,7 +101,6 @@ jobs:
             https://api.github.com/repos/grisp/grisp/issues \
             -d "{\"title\":\"Deploy test failed for OTP-${{ matrix.otp }}\",\"body\":\"Final deployment failed after successful build.\nOTP Version: ${{ matrix.otp }}\nApplications: [${{ matrix.deps }}]\nWorkflow: https://github.com/grisp/grisp/actions/runs/${{ github.run_id }}\",\"labels\":[\"otp-build\"]}"
           fi
-
           exit 1
 
       - name: Upload as GitHub Artifact

@@ -72,7 +72,6 @@ jobs:
           rebar3 grisp build --tar
           PKG_NAME=$(ls _grisp/grisp2/otp/${{matrix.otp}}/package)
           echo "pkg_name=$PKG_NAME" >> $GITHUB_ENV
-
       - name: Deploy test
         if: ${{ steps.build.outcome == 'success' }}
         id: deploy-test
@@ -101,10 +100,7 @@ jobs:
             https://api.github.com/repos/grisp/grisp/issues \
             -d "{\"title\":\"Deploy test failed for OTP-${{ matrix.otp }}\",\"body\":\"Final deployment failed after successful build.\nOTP Version: ${{ matrix.otp }}\nApplications: [${{ matrix.deps }}]\nWorkflow: https://github.com/grisp/grisp/actions/runs/${{ github.run_id }}\",\"labels\":[\"otp-build\"]}"
           fi
-
           exit 1
-
-
       - name: Upload as GitHub Artifact
         id: artifact-upload
         if: ${{ steps.deploy-test.outcome == 'success' }}
